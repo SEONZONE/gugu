@@ -1,0 +1,26 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.label {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.textarea {
+  resize: vertical;
+  padding: 10px 12px;
+  border: 1px solid var(--field);
+  border-radius: 10px;
+  background: var(--surface-alt);
+  font-size: 14px;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}

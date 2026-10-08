@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 구구 가계부
 
-## Getting Started
+우리 둘이 작성한 HTML 가계부 파일을 올려 두고 달별로 열어 보는 사이트예요.
 
-First, run the development server:
+- 처음 들어오면 비밀번호 창이 뜨고, 맞게 입력하면 보관함이 열려요 (30일 동안 유지).
+- 보관함에서 `.html` 파일을 끌어다 놓으면 파일 이름의 날짜(`2026-09`, `202609`, `2026년 9월` 등)로 달을 자동으로 나눠요.
+- 각 달을 열면 올린 HTML을 원래 모습 그대로 보여주고, 다른 파일로 바꾸거나 삭제하거나 짧은 메모를 남길 수 있어요.
+
+## 설정
+
+`.env.example`을 `.env.local`로 복사하고 값을 채워 주세요.
+
+| 변수 | 설명 |
+| --- | --- |
+| `GUGU_PASSWORD` | 사이트 비밀번호 (필수). 바꾸면 기존 로그인이 모두 풀려요. |
+| `LEDGER_DIR` | 가계부 파일을 저장할 폴더 (선택, 기본값 `./data/ledgers`). |
+
+올린 파일은 `LEDGER_DIR`에 `YYYY-MM.html`(원본)과 `YYYY-MM.json`(파일 정보·메모)으로 저장되고, git에는 올라가지 않아요.
+
+## 실행
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+pnpm dev          # http://localhost:3000
+pnpm build && pnpm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 참고
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- 운영 모드(`pnpm start`)에서는 로그인 쿠키가 `Secure`라서 HTTPS로 접속해야 로그인이 유지돼요.
+- 파일을 디스크에 저장하므로 Vercel 같은 서버리스 환경에서는 올린 파일이 유지되지 않아요. 디스크가 있는 서버(집 서버, VPS 등)에 띄우는 걸 전제로 했어요.
+- 올린 HTML은 샌드박스 안에서 실행돼요. 스크립트는 동작하지만 `localStorage`나 이 사이트의 쿠키에는 접근할 수 없어요.
